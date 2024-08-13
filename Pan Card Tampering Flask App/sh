@@ -1,0 +1,13 @@
+heroku builds:cache:purge -a pancardapp1
+heroku buildpacks
+heroku buildpacks:set heroku/python
+
+python3.12 -m venv venv
+source venv/bin/activate
+
+pip install -r requirements.txt
+python -c "import tensorflow as tf; print(tf.__version__)"
+git add requirements.txt
+git commit -m "Update TensorFlow to 2.16.2 for Python 3.12 compatibility"
+git push heroku main
+
